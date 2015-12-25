@@ -1,4 +1,4 @@
-// $Id: seq_ui.h 2217 2015-10-06 17:11:54Z tk $
+// $Id: seq_ui.h 2250 2015-12-22 19:30:18Z tk $
 /*
  * Header file for user interface routines
  *
@@ -171,6 +171,14 @@ typedef enum {
   SEQ_UI_EDIT_DATAWHEEL_MODE_CHANGE_TRGLAYER
 } seq_ui_edit_datawheel_mode_t;
 #define SEQ_UI_EDIT_DATAWHEEL_MODE_NUM 5
+
+typedef union {
+  u8 ALL;
+
+  struct {
+    u8 RESTORE_TRACK_SELECTIONS:1;
+  };
+} seq_ui_options_t;
 
 typedef union {
   u8 ALL;
@@ -460,6 +468,8 @@ extern char ui_global_dir_list[80];
 
 extern seq_ui_edit_view_t seq_ui_edit_view;
 extern seq_ui_edit_datawheel_mode_t seq_ui_edit_datawheel_mode;
+
+extern seq_ui_options_t seq_ui_options;
 
 extern seq_ui_bookmark_t seq_ui_bookmarks[SEQ_UI_BOOKMARKS_NUM];
 

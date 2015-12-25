@@ -1,4 +1,4 @@
-// $Id: seq_record.c 2168 2015-04-27 18:45:02Z tk $
+// $Id: seq_record.c 2250 2015-12-22 19:30:18Z tk $
 /*
  * Sequencer Recording Routines
  *
@@ -509,6 +509,15 @@ s32 SEQ_RECORD_Receive(mios32_midi_package_t midi_package, u8 track)
   }
 
   if( rec_event ) {
+    // start sequencer if not running and auto start enabled
+    if( !SEQ_BPM_IsRunning() && seq_record_options.AUTO_START ) {
+      // if in auto mode and BPM generator is clocked in slave mode:
+      // change to master mode
+      SEQ_BPM_CheckAutoMaster();
+      // start generator
+      SEQ_BPM_Start();
+    }
+
     if( !step_record_mode ) {
       u8 prev_step = ui_selected_step;
       u8 new_step = t->step;
@@ -565,15 +574,6 @@ s32 SEQ_RECORD_Receive(mios32_midi_package_t midi_package, u8 track)
 	ui_selected_trg_layer = 0;
       }
 #endif
-
-      // start sequencer if not running and auto start enabled
-      if( !SEQ_BPM_IsRunning() && seq_record_options.AUTO_START ) {
-	// if in auto mode and BPM generator is clocked in slave mode:
-	// change to master mode
-	SEQ_BPM_CheckAutoMaster();
-	// start generator
-	SEQ_BPM_Start();
-      }
 
       if( step_record_mode && seq_record_options.FWD_MIDI ) {
 	if( tcc->event_mode == SEQ_EVENT_MODE_Drum || midi_package.type != NoteOn ) {

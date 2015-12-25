@@ -1,4 +1,4 @@
-// $Id: mbng_event.c 2240 2015-11-08 19:43:07Z tk $
+// $Id: mbng_event.c 2249 2015-12-21 20:03:11Z tk $
 //! \defgroup MBNG_EVENT
 //! Event Handler for MIDIbox NG
 //! \{
@@ -4534,6 +4534,23 @@ s32 MBNG_EVENT_ReceiveSysEx(mios32_midi_port_t port, u8 midi_in)
 
 		// multiply Y due to big GLCD font?
 		if( MIOS32_LCD_TypeIsGLCD() ) {
+		  // special case: label activates a new font (e.g. switching from &n to &b
+		  if( item.label ) {
+		    char *str = item.label;
+		    char font_name = 0;
+		    for(; *str != 0; ++str) {
+		      if( str[0] == '&' && str[1] != '&' ) {
+			font_name = str[1];
+		      }
+		    }
+
+		    if( font_name ) {
+		      MUTEX_LCD_TAKE;
+		      MBNG_LCD_FontInit(font_name);
+		      MUTEX_LCD_GIVE;
+		    }
+		  }
+
 		  u8 *glcd_font = MBNG_LCD_FontGet();
 		  u16 font_height = glcd_font ? glcd_font[MIOS32_LCD_FONT_HEIGHT_IX] : 8;
 		  y *= (font_height / 8);

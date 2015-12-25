@@ -1,4 +1,4 @@
-// $Id: mios32_config.h 2237 2015-11-08 18:25:25Z tk $
+// $Id: mios32_config.h 2248 2015-12-13 23:16:52Z tk $
 /*
  * Local MIOS32 configuration file
  *
@@ -12,7 +12,7 @@
 
 // The boot message which is print during startup and returned on a SysEx query
 #define MIOS32_LCD_BOOT_MSG_DELAY 0 // we delay the boot and print a message inside the app
-#define MIOS32_LCD_BOOT_MSG_LINE1 "MIDIbox NG V1.033"
+#define MIOS32_LCD_BOOT_MSG_LINE1 "MIDIbox NG V1.034"
 #define MIOS32_LCD_BOOT_MSG_LINE2 "(C) 2015 T.Klose"
 
 // define a unique VID/PID for this application

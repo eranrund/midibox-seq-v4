@@ -1,4 +1,4 @@
-// $Id: seq_ui_trkjam.c 2171 2015-05-03 14:39:38Z tk $
+// $Id: seq_ui_trkjam.c 2250 2015-12-22 19:30:18Z tk $
 /*
  * Track record page
  *
@@ -519,6 +519,7 @@ static s32 Encoder_Handler(seq_ui_encoder_t encoder, s32 incrementer)
       seq_record_options.FWD_MIDI = seq_record_options.FWD_MIDI ? 0 : 1;
     else
       seq_record_options.FWD_MIDI = (incrementer > 0);
+    ui_store_file_required = 1;
     return 1;
   }
 

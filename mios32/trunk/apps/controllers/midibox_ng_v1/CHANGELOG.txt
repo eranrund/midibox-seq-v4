@@ -1,4 +1,12 @@
-$Id: CHANGELOG.txt 2240 2015-11-08 19:43:07Z tk $
+$Id: CHANGELOG.txt 2249 2015-12-21 20:03:11Z tk $
+
+MIDIbox NG V1.034
+~~~~~~~~~~~~~~~~~
+
+   o label "std_rgbled" renamed to "std_rgb" to avoid error message
+
+   o Cursor handling on SysEx based GLCD output should now work correctly if the big font is activated
+
 
 MIDIbox NG V1.033
 ~~~~~~~~~~~~~~~~~
